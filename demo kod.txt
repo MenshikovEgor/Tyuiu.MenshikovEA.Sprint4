@@ -1,0 +1,95 @@
+import random
+-------------------------------------------------------------------
+users= []
+for i in range(100):
+    new = []
+    name = chr(random.randint(65, 90)) + chr(random.randint(97, 122)) + chr(random.randint(97, 122)) #случайные буквы имени
+
+    rases = ['Фея', 'Эльф', 'Оборотень', 'Вампир', 'Рептилоид']
+    rase = rases[random.randint(0, 4)] #случайным образом заполняется список
+
+    weapons = ['Меч одноручный','Меч двуручный','Лук','Копье','Волшебная палочка','Посох','Чайник']
+    weapon = weapons[random.randint(0, 6)]
+
+    defensers = ['Мантия','Доспехи','Кольчуга','Кожаная броня']
+    defens = defensers[random.randint(0, 3)]
+
+    bought = ['Без боевого пропуска','Боевой пропуск']
+    battlepass = bought[random.randint(0, 1)]
+
+    secondname = chr(random.randint(65, 90)) + chr(random.randint(97, 122)) + chr(random.randint(97, 122)) + 'now' # иммитация фамилии
+
+    level = random.randint(1, 100)
+
+    new.append(level)
+    new. append ( name)
+    new.append(secondname)
+    new.append(rase)
+    new.append(weapon)
+    new.append(defens)
+    new.append(battlepass)
+
+    if len(users) < 100:
+        users.append(new)
+        new = []
+#создание списка юзеров
+
+---------------------------------------------------------------------------------------
+#core
+def main():
+    while True:
+            print('1. Рейтинг в алфавитном порядке по имени')
+            print('2. Рейтинг в алфавитном порядке по фамилии')
+            print('3. Рейтинг в алфавитном порядке по характеристике персонажа')
+            print('напишите любую другую клавишу чтобы выйти из цикла')
+            choice = input('Give me the order by choosing a number. ')
+            choice = str(choice)
+            if choice == '1':
+                name(users)
+            elif choice == '2':
+                secondname(users)
+            elif choice == '3':
+                think(users)
+            else:
+                break
+
+# вызов функций по запросу пользователя
+----------------------------------------------------------------
+def think(users):
+    top = []
+    sequence = 1
+    search = str(input('Рейтинг какой характеристики вы хотите?'))
+    for user in users:
+        if search in user:
+            top. append( user )
+
+    aSort = sorted(top, reverse = True)
+    if len(aSort) != 0:
+        for user in aSort:
+            print(sequence, 'место:', *user)
+            sequence += 1
+    else:
+        print('Таких характеристик не встречается')
+    print()
+# сортировка в топ каждого владельца харктеристики которую потребовал пользователь
+--------------------------------------------------------------------------------
+def name(users):
+    sequence = 1
+    aSort = sorted(users, reverse=False, key=lambda x: x[1])
+    for user in aSort:
+        print(sequence,'место:', *user)
+        sequence+=1
+    print()
+# выставление пользователей в алфавитном порядке по имени
+-----------------------------------------------------------------------------------
+def secondname(users):
+    sequence = 1
+    aSort = sorted(users, reverse=False, key=lambda x: x[2])
+    for user in aSort:
+        print(sequence, 'место:', *user)
+        sequence+=1
+    print()
+#выставление пользователей в алфавитном порядке по фамилии
+
+main()
+
